@@ -47,12 +47,10 @@ module.exports = `
     """
     usersByFindString(findString: String): [User]
 
-
     """
-    Log in with email and password
+    login a user
     """
-    login(user: loginInput): AuthData
-
+    login(email: String, password: String): AuthData
 
   }
   extend type Mutation {
@@ -60,8 +58,8 @@ module.exports = `
     Creating new user
     """
     createUser(
-      user: userInput
+      email: String, password: String
     ): AuthData
-    
+
   }
 `;

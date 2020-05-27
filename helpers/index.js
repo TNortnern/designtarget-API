@@ -12,11 +12,22 @@ const fileURL = (filename) => {
 };
 /**
  * @param {string} id Pass the ID you want validated by MongoDB
- * @returns error if id not valid and nothing if it is
+ * @returns error if id not valid and returns nothing if it is
  */
 exports.validateID = (id) => {
   if (!mongoose.Types.ObjectId.isValid(id)) throw new Error("Invalid ID");
 };
+
+/**
+ * @param {string} id Pass the IDs you want validated by MongoDB
+ * @returns error if id not valid and returns nothing if they are
+ */
+exports.bulkValidateID = ids => {
+  ids.forEach(id => {
+    if (!mongoose.Types.ObjectId.isValid(id)) throw new Error(`Invalid ID: ${id}`);
+  });
+};
+
 /**
  * @param {file} file Pass a file you want uploaded to imgur
  * @returns the file URL if successful but returns error if not

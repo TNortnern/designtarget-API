@@ -1,23 +1,23 @@
 const usersResolvers = require("../models/users/resolvers");
-const rolesResolvers = require("../models/roles/resolvers");
+const resourcesResolvers = require("../models/resources/resolvers");
 const categoriesResolvers = require("../models/categories/resolvers");
-const ratingResolvers = require("../models/ratings/resolvers");
+const likesResolvers = require("../models/likes/resolvers");
 
 module.exports = {
   Query: {
     ...usersResolvers.Query,
-    ...rolesResolvers.Query,
+    ...resourcesResolvers.Query,
     ...categoriesResolvers.Query,
-    ...ratingResolvers.Query,
+    ...likesResolvers.Query,
   },
   Mutation: {
     ...usersResolvers.Mutation,
-    ...rolesResolvers.Mutation,
+    ...resourcesResolvers.Mutation,
     ...categoriesResolvers.Mutation,
-    ...ratingResolvers.Mutation,
+    ...likesResolvers.Mutation,
   },
   User: { ...usersResolvers.User },
-  UserProfile: { ...usersResolvers.UserProfile },
   AuthData: { ...usersResolvers.AuthData },
-  Rating: { ...ratingResolvers.Rating },
+  Resource: { ...resourcesResolvers.Resource },
+  Image: { ...resourcesResolvers.Image }
 };

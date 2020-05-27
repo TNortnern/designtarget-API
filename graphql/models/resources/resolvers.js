@@ -14,7 +14,7 @@ module.exports = {
     ) => {
       validateID(category);
       const imageURL = await fileUpload(image);
-      const image = {
+      image = {
         url: imageURL,
         alt,
       };
@@ -28,5 +28,15 @@ module.exports = {
       });
       return resource.save();
     },
+  },
+  Resource: {
+    likes: async (parent) => {
+      likes = await Like.find({ resource: parent.id });
+      return likes;
+    },
+  },
+  Image: {
+    url: (parent) => parent,
+    alt: (parent) => parent,
   },
 };

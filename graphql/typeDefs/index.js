@@ -1,8 +1,8 @@
 const { gql } = require('apollo-server-express')
-const categoriesDefs = require('../modules/categories/typeDefs')
-const ratingsDefs = require('../modules/ratings/typeDefs')
-const rolesDefs = require('../modules/roles/typeDefs')
-const userDefs = require('../model/users/typeDefs')
+const resourcesDefs = require('../models/resources/typeDefs')
+const categoriesDefs = require('../models/categories/typeDefs')
+const likesDefs = require('../models/likes/typeDefs')
+const userDefs = require('../models/users/typeDefs')
 const masterDef = gql`
 type Query {
     baseQuery: String
@@ -11,4 +11,4 @@ type Mutation {
     baseMutation: String
 }
 `
-module.exports = [masterDef, categoriesDefs, ratingsDefs, rolesDefs, userDefs]
+module.exports = [masterDef, categoriesDefs, likesDefs, resourcesDefs, userDefs]

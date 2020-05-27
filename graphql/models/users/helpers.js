@@ -1,10 +1,7 @@
 const User = require("../../../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-exports.register = async ({
-  email,
-  password,
-}) => {
+exports.register = async (email, password) => {
   const exists = await User.findOne({ email });
   if (exists) {
     throw new Error("User already exists");
@@ -22,7 +19,7 @@ exports.register = async ({
     ...user._doc,
   };
 };
-exports.login = async ({ email, password }) => {
+exports.login = async ( email, password ) => {
   const user = await User.findOne({ email });
   if (!user) throw new Error("Invalid Credentials");
   const match = await bcrypt.compare(password, user.password);
@@ -55,5 +52,5 @@ exports.generateAccessToken = (user, expiresIn) => {
     process.env.JWT_AUTH_KEY,
     { expiresIn }
   );
-  return token
+  return token;
 };

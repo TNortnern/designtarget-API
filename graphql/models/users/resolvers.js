@@ -1,8 +1,6 @@
 const User = require("../../../models/User");
-const Category = require("../../../models/Category");
-const Rating = require("../../../models/Rating");
-const Roles = require("../../../models/Role");
-const UserProfile = require("../../../models/UserProfile");
+const Resource = require("../../../models/Resource");
+const Like = require("../../../models/Like");
 const { register, login, getUserByToken } = require("./helpers");
 
 module.exports = {
@@ -17,23 +15,24 @@ module.exports = {
       return await User.findOne({ email: email });
     },
     userByToken: async (_, { token }) => {
-      return getUserByToken(token)
+      return getUserByToken(token);
     },
     usersByFindString: async (parent, { findString }) => {
       return await User.find(eval("f=" + findString));
     },
-    login: async (_, { user }) => {
-      return login(user);
+    login: async (_, { email, password }) => {
+      return login(email, password);
     },
   },
   Mutation: {
-    createUser: async (_, { user }, context) => {
-      return register(user);
+    createUser: async (_, { email, password }, context) => {
+      return register(email, password);
     },
   },
   User: {
     resources: async (parent) => {
-      return await UserProfile.findOne({ user: parent.id });
+      const likedResources = Like.find({ user: parent.id });
+      return await Resource.find({ _id: { $in: likedResources } })
     },
   },
   AuthData: {

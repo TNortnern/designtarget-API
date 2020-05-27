@@ -4,6 +4,7 @@ module.exports = `
     name: String!
     description: String!
     image: Image!
+    likes: [Like]
     createdAt: String!
     updatedAt: String!
   }
@@ -17,6 +18,7 @@ module.exports = `
     """
     resources: [Resource]
 
+
     """
     search for resource by name\n
     **Example:**\n
@@ -25,6 +27,11 @@ module.exports = `
     }
     """
     resourcesLike(name: String): [Resource]
+
+    """
+    get resources liked by current user
+    """
+    likedByUser(user: ID): Boolean
   }
   extend type Mutation {
     
@@ -37,7 +44,7 @@ module.exports = `
         image: Upload,
         alt: String,
         category: String,
-        importance: Integer,
+        importance: Int,
         url: String,
         ): Resource
   }
