@@ -1,15 +1,26 @@
 const fs = require("fs");
 const path = require("path");
-const jwt = require("jsonwebtoken");
 const imgur = require("imgur-module");
 const unique = new Date().getTime().toString();
+const mongoose = require("mongoose");
+
 // intilize client id
-imgur.setClientId("546c25a59c58ad7");
+imgur.setClientId(process.env.IMGUR_CLIENT_ID);
 
 const fileURL = (filename) => {
   return process.env.PRODUCTION_APP_URL + "/images/" + unique + filename;
 };
-
+/**
+ * @param {string} id Pass the ID you want validated by MongoDB
+ * @returns error if id not valid and nothing if it is
+ */
+exports.validateID = (id) => {
+  if (!mongoose.Types.ObjectId.isValid(id)) throw new Error("Invalid ID");
+};
+/**
+ * @param {file} file Pass a file you want uploaded to imgur
+ * @returns the file URL if successful but returns error if not
+ */
 exports.fileUpload = async (file) => {
   const imageURL = await upload(file);
   // uploading image file
@@ -26,12 +37,15 @@ exports.fileUpload = async (file) => {
     .catch((err) => {
       console.log(err);
     });
+  if (error) {
+    throw new Error("Error Uploading");
+  }
   return imgurURL;
 };
 /** @param {array} images
  *  @returns {array} returns array of links
  *  @description Takes multiple images, uploads them to imgur then returns the links as an array
- * 
+ *
  */
 exports.multiFileUpload = async (images) => {
   let imageNames = [];
@@ -81,21 +95,4 @@ const upload = async (file) => {
     });
 
   return getFileURL;
-};
-/**
- * @param {object} user
- * @param {string} expiresIn
- * @returns {string}
- * @description Takes a user and assigns them a token
- */
-exports.generateAccessToken = (user, expiresIn) => {
-  const token = jwt.sign(
-    {
-      id: user.id,
-      email: user.email,
-    },
-    process.env.JWT_AUTH_KEY,
-    { expiresIn }
-  );
-  return token
 };

@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const technologySchema = new Schema({
+const categorySchema = new Schema({
   name: {
     type: String,
     required: true,
   },
   description: String,
-  image: { type: String, required: true },
   isDeleted: { type: Boolean, default: 0 },
   createdAt: {
     type: Date,
@@ -19,4 +18,4 @@ const technologySchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Technology", technologySchema);
+module.exports = mongoose.model("Category", categorySchema);

@@ -1,25 +1,18 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const projectSchema = new Schema({
+const resourceSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
   description: String,
-  images: [String],
-  technologies: [String],
-  projectType: {
-    type: String,
-    required: true,
+  image: {
+    url: String,
+    alt: String
   },
-  links: {
-    codeLink: {
-      type: String,
-      required: true,
-    },
-    hostedLink: String,
-  },
+  category: [String],
+  url: String,
   importance: {
     type: Number,
     default: 0,
@@ -38,4 +31,4 @@ const projectSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Projects", projectSchema);
+module.exports = mongoose.model("Resource", resourceSchema);

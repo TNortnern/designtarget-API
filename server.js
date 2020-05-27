@@ -3,36 +3,35 @@ const dotenv = require('dotenv')
 dotenv.config();
 const express = require("express");
 const cors = require("cors");
-const graphqlHTTP = require("express-graphql");
+const { ApolloServer, gql } = require("apollo-server-express");
 const { graphqlUploadExpress } = require("graphql-upload");
-const isAuthed = require('./middleware/isAuthed')
-const schema = require('./graphql');
+const typeDefs = require("./graphql/typeDefs");
+const resolvers = require("./graphql/resolvers");
+const isAuthed = require("./middleware/isAuthed");
 
 const app = express();
 const { setupDB } = require("./config/db");
-app.use(express.static(__dirname + "/public"));
-
-
 setupDB();
+app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(cors());
 app.use(isAuthed);
-app.use(
-  "/graphql",
-  graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }),
-  graphqlHTTP({
-    schema,
-    graphiql: true,
-    pretty: true,
-    introspection: true
-  })
-);
-app.get("/", async function (req, res) {
-  const projects = await require("./models/Projects").find
-  res.json({ projects });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: async ({ req, res }) => ({ req, res }), // now we can access express objects from apollo context arg
+  playground: true,
+  introspection: true,
 });
-// use routes
 
-const port = process.env.PORT || 4000;
+server.applyMiddleware({ app });
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.get("/", async function (req, res) {
+  res.send('API Running')
+});
+
+const port = process.env.PORT || 5000;
+
+app.listen({ port }, () =>
+  console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`)
+);
