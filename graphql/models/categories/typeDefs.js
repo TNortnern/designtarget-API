@@ -3,6 +3,8 @@ module.exports = `
     id: ID!
     name: String!
     description: String!
+    resources: [Resource]
+    topFour: [Resource]
     createdAt: String!
     updatedAt: String!
   }

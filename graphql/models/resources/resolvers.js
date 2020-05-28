@@ -1,4 +1,5 @@
 const Resource = require("../../../models/Resource");
+const Category = require("../../../models/Category");
 const Like = require("../../../models/Like");
 const { createResource, updateResource } = require("./helpers")
 const { fileUpload, validateID } = require("../../../helpers");
@@ -49,9 +50,11 @@ module.exports = {
   },
   Resource: {
     likes: async (parent) => {
-      likes = await Like.find({ resource: parent.id });
-      return likes;
+      return await Like.find({ resource: parent.id });
     },
+    category: async(parent) => {
+      return await Category.find({ _id: parent.category })
+    }
   },
   Image: {
     url: (parent) => parent.url,

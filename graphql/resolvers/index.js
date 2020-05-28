@@ -20,5 +20,6 @@ module.exports = {
   AuthData: { ...usersResolvers.AuthData },
   Resource: { ...resourcesResolvers.Resource },
   Image: { ...resourcesResolvers.Image },
-  Like: { ...likesResolvers.Like }
+  Like: { ...likesResolvers.Like },
+  Category: { ...categoriesResolvers.Category }
 };

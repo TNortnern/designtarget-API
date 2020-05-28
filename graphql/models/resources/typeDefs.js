@@ -3,6 +3,7 @@ module.exports = `
     id: ID!
     name: String!
     description: String!
+    category: ID
     image: Image!
     likes: [Like]
     createdAt: String!

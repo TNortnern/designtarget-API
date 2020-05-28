@@ -11,7 +11,7 @@ const resourceSchema = new Schema({
     url: String,
     alt: String
   },
-  category: [String],
+  category: String,
   url: String,
   importance: {
     type: Number,
