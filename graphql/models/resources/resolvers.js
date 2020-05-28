@@ -1,5 +1,6 @@
 const Resource = require("../../../models/Resource");
 const Like = require("../../../models/Like");
+const { createResource, updateResource } = require("./helpers")
 const { fileUpload, validateID } = require("../../../helpers");
 module.exports = {
   Query: {
@@ -13,22 +14,38 @@ module.exports = {
       parent,
       { name, description, image, alt, category, url, importance }
     ) => {
-      validateID(category);
-      // const imageURL = await fileUpload(image);
-      image = {
-        url: "https://designtarget.now.sh/img/mixkit.f1abf960.png",
-        alt,
-      };
-      const resource = await new Resource({
+      return await createResource(
         name,
         description,
-        category,
         image,
+        alt,
+        category,
         url,
-        importance,
-      });
-      return resource.save();
+        importance
+      );
     },
+    updateResource: async (
+      parent,
+      { id, name, description, image, alt, category, url, importance }
+    ) => {
+      
+      return await updateResource(
+        id,
+        name,
+        description,
+        image,
+        alt,
+        category,
+        url,
+        importance
+      );
+    },
+    deleteResource: async (parent, { id } ) => {
+      validateID(id)
+      const resource = await Resource.findByIdAndDelete(id);
+      if (resource) return true
+      else return false
+    }
   },
   Resource: {
     likes: async (parent) => {

@@ -47,5 +47,24 @@ module.exports = `
         importance: Int,
         url: String,
         ): Resource
+
+    """
+    update a resource
+    """
+    updateResource(
+        id: ID,
+        name: String,
+        description: String,
+        image: Upload,
+        alt: String,
+        category: ID,
+        url: String,
+        importance: Int
+      ): Resource
+
+      """
+      delete a resource
+      """
+      deleteResource(id: ID): Boolean
   }
 `;

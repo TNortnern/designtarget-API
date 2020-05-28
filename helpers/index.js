@@ -19,10 +19,11 @@ exports.validateID = (id) => {
 };
 
 /**
- * @param {string} id Pass the IDs you want validated by MongoDB
+ * @param {array} ids Pass the IDs you want validated by MongoDB
  * @returns error if id not valid and returns nothing if they are
  */
 exports.bulkValidateID = ids => {
+  console.log('ids', ids)
   ids.forEach(id => {
     if (!mongoose.Types.ObjectId.isValid(id)) throw new Error(`Invalid ID: ${id}`);
   });
