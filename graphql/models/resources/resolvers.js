@@ -1,4 +1,5 @@
 const Resource = require("../../../models/Resource");
+const Like = require("../../../models/Like");
 const { fileUpload, validateID } = require("../../../helpers");
 module.exports = {
   Query: {
@@ -13,9 +14,9 @@ module.exports = {
       { name, description, image, alt, category, url, importance }
     ) => {
       validateID(category);
-      const imageURL = await fileUpload(image);
+      // const imageURL = await fileUpload(image);
       image = {
-        url: imageURL,
+        url: "https://designtarget.now.sh/img/mixkit.f1abf960.png",
         alt,
       };
       const resource = await new Resource({
@@ -36,7 +37,7 @@ module.exports = {
     },
   },
   Image: {
-    url: (parent) => parent,
-    alt: (parent) => parent,
+    url: (parent) => parent.url,
+    alt: (parent) => parent.alt,
   },
 };

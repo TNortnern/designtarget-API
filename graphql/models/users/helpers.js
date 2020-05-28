@@ -43,7 +43,7 @@ exports.getUserByToken = (token) => {
  * @returns {string}
  * @description Takes a user and assigns them a token
  */
-exports.generateAccessToken = (user, expiresIn) => {
+const generateAccessToken = (user, expiresIn) => {
   const token = jwt.sign(
     {
       id: user.id,

@@ -1,4 +1,5 @@
 const Like = require("../../../models/Like");
+const Resource = require("../../../models/Resource");
 const { bulkValidateID } = require("../../../helpers");
 module.exports = {
   Query: {
@@ -7,20 +8,22 @@ module.exports = {
   Mutation: {
     toggleLike: async (parent, { id, user, resource }) => {
       bulkValidateID([user, resource]);
-      const updateObj = {
-          isLiked: !isLiked,
-          updatedAt: Date.now()
-      }
-      let like = await Like.findByIdAndUpdate(id, updateObj, { new: true }).orFail(async () => {
-        return await Like.create({
+      let like = await Like.findById(id);
+      if (like) {
+        let currentValue = like.isLiked;
+        like.isLiked = !currentValue;
+        like.updatedAt = Date.now();
+        await like.save()
+      } else {
+        await Like.create({
           user,
           resource,
         });
-      })
-      if (!like) {
-        throw new Error('Resource could not be updated.')
       }
-      return like;
+      return await Resource.findById(resource)
     },
   },
+  Like: {
+    resource: async (parent) => await Resource.findById(parent.resource)
+  }
 };

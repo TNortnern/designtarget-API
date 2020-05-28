@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 const likeSchema = new Schema({
   user: String,
   resource: String,
-  isLiked: Boolean,
+  isLiked: {
+    type: Boolean,
+    default: true
+  },
   createdAt: {
     type: Date,
     default: new Date(),

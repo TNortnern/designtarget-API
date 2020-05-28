@@ -27,7 +27,9 @@ const server = new ApolloServer({
 server.applyMiddleware({ app });
 
 app.get("/", async function (req, res) {
+  // res.json({ test: await require("./models/Resource").find({}) })
   res.send('API Running')
+
 });
 
 const port = process.env.PORT || 5000;
