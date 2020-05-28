@@ -31,8 +31,9 @@ module.exports = {
   },
   User: {
     resources: async (parent) => {
-      const likedResources = Like.find({ user: parent.id });
-      return await Resource.find({ _id: { $in: likedResources } })
+      const likedResources = await Like.find({ user: parent.id }, "resource");
+      const resourceIDS = likedResources.map((r) => r.resource);
+      return await Resource.find({ _id: { $in: resourceIDS } });
     },
   },
   AuthData: {

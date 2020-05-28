@@ -23,7 +23,6 @@ exports.validateID = (id) => {
  * @returns error if id not valid and returns nothing if they are
  */
 exports.bulkValidateID = ids => {
-  console.log('ids', ids)
   ids.forEach(id => {
     if (!mongoose.Types.ObjectId.isValid(id)) throw new Error(`Invalid ID: ${id}`);
   });

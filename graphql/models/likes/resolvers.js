@@ -1,5 +1,6 @@
 const Like = require("../../../models/Like");
 const Resource = require("../../../models/Resource");
+const User = require("../../../models/User");
 const { bulkValidateID } = require("../../../helpers");
 module.exports = {
   Query: {
@@ -24,6 +25,7 @@ module.exports = {
     },
   },
   Like: {
-    resource: async (parent) => await Resource.findById(parent.resource)
+    resource: async (parent) => await Resource.findById(parent.resource),
+    user: async (parent) => await User.findById(parent.user)
   }
 };

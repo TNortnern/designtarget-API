@@ -27,5 +27,15 @@ module.exports = `
     create new category
     """
     createCategory(name: String, description: String): Category
+
+    """
+    update a category
+    """
+    updateCategory(id: ID, name: String, description: String): Category
+
+    """
+    deletes a category
+    """
+    deleteCategory(id: ID): Category
   }
 `;
