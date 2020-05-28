@@ -22,6 +22,11 @@ module.exports = `
     }
     """
     categoriesLike(name: String): [Category]
+
+    """
+    get a single category
+    """
+    category(id: ID): Category
   }
   extend type Mutation {
     

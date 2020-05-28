@@ -3,7 +3,8 @@ const Resource = require("../../../models/Resource");
 const { validateID } = require('../../../helpers')
 module.exports = {
   Query: {
-    categories: () => Category.find({}),
+    categories: async () => await Category.find({}),
+    category: async (parent, { id }) => await Category.findById(id),
     categoriesLike: async (parent, { name }) => {
       return await Category.find({ name: new RegExp(name, "i") });
     },
