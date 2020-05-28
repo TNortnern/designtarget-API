@@ -8,6 +8,7 @@ module.exports = {
     users: async (parent, _, { req }) => {
       return await User.find({});
     },
+    user: async (parent, { id }) => User.findById(id),
     usersLike: async (parent, { name }) => {
       return await User.find({ name: new RegExp(name, "i") });
     },

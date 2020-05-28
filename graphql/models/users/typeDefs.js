@@ -17,6 +17,10 @@ module.exports = `
     query for all users
     """
     users: [User]
+    """
+    query for a single user
+    """
+    user(id: ID): User
 
 
     """
