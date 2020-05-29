@@ -12,7 +12,7 @@ exports.createResource = async (
   validateID(category);
   // const imageURL = await fileUpload(image);
   image = {
-    url: "https://designtarget.now.sh/img/mixkit.f1abf960.png",
+    url: image,
     alt,
   };
   const resource = await new Resource({
@@ -41,7 +41,7 @@ exports.updateResource = async (
   // const imageURL = await fileUpload(image);
   if (name) resource.name = name
   if (description) resource.description = description
-  if (image) resource.image.url = "new"
+  if (image) resource.image.url = image
   if (alt) resource.image.alt = alt
   if (category) resource.category = category
   if (url) resource.url = url

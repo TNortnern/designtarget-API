@@ -2,6 +2,7 @@ module.exports = `
   type User {
     id: ID!
     email: String!
+    isAdmin: Boolean
     resources: [Resource]
     createdAt: String!
     updatedAt: String!

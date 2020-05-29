@@ -43,7 +43,7 @@ module.exports = `
     createResource(
         name: String,
         description: String,
-        image: Upload,
+        image: String,
         alt: String,
         category: String,
         importance: Int,
@@ -57,7 +57,7 @@ module.exports = `
         id: ID,
         name: String,
         description: String,
-        image: Upload,
+        image: String,
         alt: String,
         category: ID,
         url: String,
