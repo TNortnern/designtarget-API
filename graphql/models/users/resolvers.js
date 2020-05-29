@@ -32,7 +32,7 @@ module.exports = {
   },
   User: {
     resources: async (parent) => {
-      const likedResources = await Like.find({ user: parent.id }, "resource");
+      const likedResources = await Like.find({ user: parent.id, isLiked: true }, "resource");
       const resourceIDS = likedResources.map((r) => r.resource);
       return await Resource.find({ _id: { $in: resourceIDS } });
     },
