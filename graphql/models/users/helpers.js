@@ -33,7 +33,7 @@ exports.login = async ( email, password ) => {
 };
 
 exports.getUserByToken = (token) => {
-  const user = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+  const user = jwt.verify(token, process.env.JWT_AUTH_KEY);
   return user;
 };
 
@@ -48,6 +48,7 @@ const generateAccessToken = (user, expiresIn) => {
     {
       id: user.id,
       email: user.email,
+      isAdmin: user.isAdmin
     },
     process.env.JWT_AUTH_KEY,
     { expiresIn }
