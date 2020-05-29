@@ -50,7 +50,7 @@ module.exports = {
   },
   Resource: {
     likes: async (parent) => {
-      return await Like.find({ resource: parent.id });
+      return await Like.find({ resource: parent.id, isLiked: true });
     },
     category: async(parent) => {
       return await Category.find({ _id: parent.category })
