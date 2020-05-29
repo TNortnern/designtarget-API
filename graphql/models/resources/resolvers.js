@@ -5,7 +5,7 @@ const { createResource, updateResource } = require("./helpers")
 const { fileUpload, validateID } = require("../../../helpers");
 module.exports = {
   Query: {
-    resources: () => Resource.find({}),
+    resources: () => Resource.find({}).sort({ importance: 1 }),
     resourcesLike: async (parent, { name }) => {
       return await Resource.find({ name: new RegExp(name, "i") });
     },
