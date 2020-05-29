@@ -34,10 +34,10 @@ module.exports = {
   },
   Category: {
     resources: async (parent) =>
-      await Resource.find({ category: parent._id }).sort({ importance: 1 }),
+      await Resource.find({ category: parent._id }).sort({ importance: -1 }),
     topFour: async (parent) =>
       await Resource.find({ category: parent._id })
-        .sort({ importance: 1 })
+        .sort({ importance: -1 })
         .limit(4),
   },
 };
