@@ -4,6 +4,7 @@ module.exports = `
     name: String!
     description: String!
     category: ID
+    importance: Int
     url: String!
     image: Image!
     likes: [Like]
