@@ -18,6 +18,6 @@ extend type Mutation {
     """
     toggle like of a resource
     """
-    toggleLike(id: ID, user: ID, resource: ID): Resource
+    toggleLike(id: ID, user: ID, resource: ID): User
 }
 `

@@ -21,7 +21,7 @@ module.exports = {
           resource,
         });
       }
-      return await Resource.findById(resource)
+      return await User.findById(user)
     },
   },
   Like: {
