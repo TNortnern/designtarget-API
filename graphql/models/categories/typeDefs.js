@@ -26,7 +26,7 @@ module.exports = `
     """
     get a single category
     """
-    category(id: ID): Category
+    category(name: String): Category
   }
   extend type Mutation {
     

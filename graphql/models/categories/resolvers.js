@@ -4,13 +4,14 @@ const { validateID } = require('../../../helpers')
 module.exports = {
   Query: {
     categories: async () => await Category.find({}),
-    category: async (parent, { id }) => await Category.findById(id),
+    category: async (parent, { name }) => await Category.findOne({ name }),
     categoriesLike: async (parent, { name }) => {
       return await Category.find({ name: new RegExp(name, "i") });
     },
   },
   Mutation: {
     createCategory: async (parent, { name, description }) => {
+      name = name.toLowerCase();
       const category = await new Category({
         name,
         description,
