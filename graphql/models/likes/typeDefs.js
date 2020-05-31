@@ -8,16 +8,23 @@ type Like {
     updatedAt: String
 }
 
+type LikeData {
+    user: User
+    like: Like
+}
+
 extend type Query {
     """
     get all likes
     """
     likes: [Like]
+
+    like: Like
 }
 extend type Mutation {
     """
     toggle like of a resource
     """
-    toggleLike(id: ID, user: ID, resource: ID): User
+    toggleLike(id: ID, user: ID, resource: ID): LikeData
 }
 `

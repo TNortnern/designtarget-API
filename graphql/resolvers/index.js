@@ -21,5 +21,6 @@ module.exports = {
   Resource: { ...resourcesResolvers.Resource },
   Image: { ...resourcesResolvers.Image },
   Like: { ...likesResolvers.Like },
+  LikeData: { ...likesResolvers.LikeData },
   Category: { ...categoriesResolvers.Category }
 };
