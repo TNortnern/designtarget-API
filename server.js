@@ -20,7 +20,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: async ({ req, res }) => ({ req, res }), // now we can access express objects from apollo context arg
-  playground: true,
+  playground: process.env.NODE_ENV === 'production' ? false : true,
   introspection: true,
 });
 
