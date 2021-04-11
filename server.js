@@ -1,4 +1,4 @@
-const dotenv = require('dotenv')
+const dotenv = require("dotenv");
 // index.js, line 1:
 dotenv.config();
 const express = require("express");
@@ -20,20 +20,34 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: async ({ req, res }) => ({ req, res }), // now we can access express objects from apollo context arg
-  playground: process.env.NODE_ENV === 'production' ? false : true,
-  introspection: true,
+  playground: process.env.NODE_ENV === "production" ? false : true,
+  introspection: process.env.NODE_ENV === "production" ? false : true,
 });
+// const User = require("./models/User");
 
 server.applyMiddleware({ app });
 
 app.get("/", async function (req, res) {
   // res.json({ test: await require("./models/Resource").find({}) })
-  res.send('API Running')
-
+  res.send("API Running");
 });
+
+// const Resource = require("./models/Resource");
+
+// const func = async () => {
+//   await Resource.updateMany(
+//     {
+//       name: 'Pexels',
+//     },
+//     { url: 18 }
+//   );
+// };
+// func();
 
 const port = process.env.PORT || 5000;
 
 app.listen({ port }, () =>
-  console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`)
+  console.log(
+    `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
+  )
 );
